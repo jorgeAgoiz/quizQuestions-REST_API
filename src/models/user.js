@@ -11,6 +11,10 @@ const userSchema = new Schema({
   key: {
     type: String,
     required: true
+  },
+  last_access: {
+    type: Date,
+    required: true
   }
 },
 {
