@@ -2,9 +2,10 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 const PORT = process.env.PORT
+const MONGODB_URI = process.env.MONGODB_URI
 
 const express = require('express')
-const fetch = require('node-fetch')
+const mongoose = require('mongoose')
 const cors = require('cors')
 
 const app = express()
@@ -17,9 +18,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 app.use('/', authRoutes)
 
-app.listen(PORT, () => {
-  console.log(`Listening in port ${PORT}...`)
-})
+mongoose
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(result => {
+    app.listen(PORT, () => {
+      console.log(`Listening in port ${PORT}...`)
+    })
+  }).catch(err => console.log(err))
 
 /*
     Siguientes pasos a seguir:
