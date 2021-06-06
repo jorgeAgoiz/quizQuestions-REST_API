@@ -56,6 +56,7 @@ exports.signUp = async (req, res, next) => {
   - Tenemos que maquetar el correo electronico.
    */
 
+// "/apikey" => DELETE
 exports.deleteUser = async (req, res, next) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {

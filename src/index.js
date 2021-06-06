@@ -9,14 +9,15 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 const app = express()
-
-/* Routes */
-const authRoutes = require('./routes/auth')
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
+
+/* Routes */
+const authRoutes = require('./routes/auth')
+const questionsRoute = require('./routes/questions')
 app.use('/', authRoutes)
+app.use('/', questionsRoute)
 
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
@@ -28,7 +29,6 @@ mongoose
 
 /*
     Siguientes pasos a seguir:
-    - Creacion ruta eliminar usuario.
     - Maquetar los correos.
     - Comenzar con las rutas de petición de preguntas.
     - Construir la coleccion de preguntas en nuestra base de datos.
