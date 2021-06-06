@@ -1,18 +1,23 @@
 const User = require('../models/user')
 const { v4: uuidv4 } = require('uuid')
 const { transporter } = require('../utils/nodemailer')
+const { validationResult } = require('express-validator')
 
 const USER = process.env.MAIL_NAME
 
 // "/apikey" => POST
 exports.signUp = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(500).json({ message: 'Something went wrong.', errors })
+  }
+
   const { email } = req.body
   const key = uuidv4()
   const timeAccess = new Date(Date.now())
 
   try {
     const existingUser = await User.findOne({ email })
-
     if (existingUser) {
       const mailSended = await transporter.sendMail({
         from: `"Questions Quiz" ${USER}`,
@@ -52,6 +57,16 @@ exports.signUp = async (req, res, next) => {
    */
 
 exports.deleteUser = async (req, res, next) => {
-  console.log('funciono')
-  return res.status(201).json({ message: 'Everything is OK.' })
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(500).json({ message: 'Something went wrong.', errors })
+  }
+
+  const { email } = req.body
+  const deletedUser = await User.findOneAndDelete({ email })
+
+  !deletedUser
+    ? res.status(500).json({ message: 'Error, not found.' })
+    : res.status(200).json({ message: 'Deleted user.', deleted_user: { email: deletedUser.email, id: deletedUser._id } })
 }
+/* En esta ruta tengo que plantear si quiero enviar un correo de confirmación al borrado del usuario */
