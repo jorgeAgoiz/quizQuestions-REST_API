@@ -1,8 +1,9 @@
 const { Router } = require('express')
 const router = Router()
 
-const { signUp } = require('../controllers/auth')
+const { signUp, deleteUser } = require('../controllers/auth')
 
-router.post('/signup', signUp)
+router.post('/apikey', signUp)
+router.delete('/apikey', deleteUser)
 
 module.exports = router

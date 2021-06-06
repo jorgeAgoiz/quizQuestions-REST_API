@@ -19,7 +19,7 @@ app.use(cors())
 app.use('/', authRoutes)
 
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(result => {
     app.listen(PORT, () => {
       console.log(`Listening in port ${PORT}...`)
@@ -28,7 +28,8 @@ mongoose
 
 /*
     Siguientes pasos a seguir:
-    - Crear BD Users
-    - Validar el registro de usuarios
-    - Configurar nodeMailer para enviar una api key por correo
+    - Creacion ruta eliminar usuario.
+    - Maquetar los correos.
+    - Comenzar con las rutas de petición de preguntas.
+    - Construir la coleccion de preguntas en nuestra base de datos.
 */
