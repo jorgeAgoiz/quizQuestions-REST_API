@@ -29,7 +29,5 @@ mongoose
 
 /*
     Siguientes pasos a seguir:
-    - Maquetar los correos.
-    - Comenzar con las rutas de petición de preguntas.
     - Construir la coleccion de preguntas en nuestra base de datos.
 */

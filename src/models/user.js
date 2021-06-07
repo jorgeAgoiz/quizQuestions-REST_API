@@ -17,6 +17,10 @@ const userSchema = new Schema({
   last_access: {
     type: Date,
     required: true
+  },
+  admin: {
+    type: Boolean,
+    required: true
   }
 },
 {

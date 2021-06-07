@@ -16,7 +16,7 @@ module.exports = {
       'deporte',
       'entretenimiento',
       'arte',
-      'Geografia',
+      'geografia',
       'ciencia',
       'historia'
     ])

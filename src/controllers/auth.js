@@ -2,6 +2,7 @@ const User = require('../models/user')
 const { v4: uuidv4 } = require('uuid')
 const { transporter } = require('../utils/nodemailer')
 const { validationResult } = require('express-validator')
+const { mailTemplate, reminderText, newKeyText } = require('../utils/mailTemplate')
 
 const USER = process.env.MAIL_NAME
 
@@ -22,9 +23,7 @@ exports.signUp = async (req, res, next) => {
         from: `"Questions Quiz" ${USER}`,
         to: email,
         subject: 'You API KEY',
-        text: `You are triying to request an API key and you are already registered with a key.
-        This is your API KEY to use "Questions Quiz" service: ${existingUser.key}`
-        /* html: `` */
+        html: mailTemplate(reminderText(existingUser.key))
       })
 
       return res.status(401).json({ message: 'This email are registered in Quiz Questions API. Check your email inbox.', response: mailSended.response })
@@ -33,7 +32,8 @@ exports.signUp = async (req, res, next) => {
     const newUser = await new User({
       email,
       key,
-      last_access: timeAccess.toLocaleString()
+      last_access: timeAccess.toLocaleString(),
+      admin: false
     })
     newUser.save()
 
@@ -41,8 +41,7 @@ exports.signUp = async (req, res, next) => {
       from: `"Questions Quiz" ${USER}`,
       to: email,
       subject: 'Your API KEY',
-      text: `This is your API KEY to use "Questions Quiz" ${key}`
-    /* html: "<b>Hello world?</b>", */
+      html: mailTemplate(newKeyText(key))
     })
 
     return res.status(201).json({ message: 'Email registered, API key sended.', response: mailSended.response })
