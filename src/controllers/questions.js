@@ -1,12 +1,21 @@
 const Questions = require('../models/question')
+const { validationResult } = require('express-validator')
 
 exports.insertQuestions = async (req, res, next) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    console.log('Error')
+    return res.status(500).json({ message: 'Something went wrong.', errors })
+  }
+
+  const { category, format, question, incorrectAnswers, correctAnswer } = req.body
+
   const newQuestion = await new Questions({
-    category: 'Deportes',
-    format: 'multiple',
-    question: 'How many NBA titles have Lebron James?',
-    incorrect_answers: ['3', '1', '6'],
-    correct_answer: '4'
+    category,
+    format,
+    question,
+    incorrectAnswers,
+    correctAnswer
   })
 
   newQuestion.save()

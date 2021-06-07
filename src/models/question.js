@@ -16,13 +16,13 @@ const questionSchema = new Schema({
     type: String,
     required: true
   },
-  incorrect_answers: [
+  incorrectAnswers: [
     {
       type: String,
       required: true
     }
   ],
-  correct_answer: {
+  correctAnswer: {
     type: String,
     required: true
   }

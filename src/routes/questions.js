@@ -1,8 +1,23 @@
 const { Router } = require('express')
 const { insertQuestions } = require('../controllers/questions')
+const {
+  validCategory,
+  validFormat,
+  validQuestion,
+  validArrayIncorrectAnswers,
+  validCorrectAnswer,
+  validIncorrectAnswers
+} = require('../utils/validators')
 const router = Router()
 
-router.post('/questions', insertQuestions)
+router.post('/questions', [
+  validCategory,
+  validFormat,
+  validQuestion,
+  validArrayIncorrectAnswers,
+  validCorrectAnswer,
+  validIncorrectAnswers
+], insertQuestions)
 
 module.exports = router
 
