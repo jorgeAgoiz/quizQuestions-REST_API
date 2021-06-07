@@ -13,8 +13,7 @@ exports.signUp = async (req, res, next) => {
   }
 
   const { email } = req.body
-  const key = uuidv4()
-  const timeAccess = new Date(Date.now())
+  const timeAccess = new Date(Date.now())/* Actualizar con cada peticion a la api */
 
   try {
     const existingUser = await User.findOne({ email })
@@ -23,14 +22,14 @@ exports.signUp = async (req, res, next) => {
         from: `"Questions Quiz" ${USER}`,
         to: email,
         subject: 'You API KEY',
-        text: `You are triying to request an API key and you are already registered with a key. 
+        text: `You are triying to request an API key and you are already registered with a key.
         This is your API KEY to use "Questions Quiz" service: ${existingUser.key}`
-      /* html: "<b>Hello world?</b>", */
+        /* html: `` */
       })
 
       return res.status(401).json({ message: 'This email are registered in Quiz Questions API. Check your email inbox.', response: mailSended.response })
     }
-
+    const key = uuidv4()
     const newUser = await new User({
       email,
       key,
