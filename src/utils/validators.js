@@ -1,13 +1,13 @@
-const { body } = require('express-validator')
+const { body, query } = require('express-validator')
 
 module.exports = {
-  validEmail: body('email')
+  validEmail: body('email')// BODY from POST USERS *******************
     .trim()
     .toLowerCase()
     .isEmail()
     .notEmpty()
     .withMessage('You must enter a valid email.'),
-  validCategory: body('category')
+  validCategory: body('category')// BODY from POST QUESTIONS *******************
     .trim()
     .toLowerCase()
     .isString()
@@ -51,5 +51,28 @@ module.exports = {
     .isString()
     .notEmpty()
     .isLength({ min: 1, max: 50 })
-    .withMessage('You must enter a valid correct answer.')
+    .withMessage('You must enter a valid correct answer.'),
+  validQueryCategory: query('category')// QUERIES from GET QUESTIONS *******************
+    .trim()
+    .toLowerCase()
+    .isIn([
+      'deporte',
+      'entretenimiento',
+      'arte',
+      'geografia',
+      'ciencia',
+      'historia',
+      null
+    ])
+    .withMessage('You must enter a valid category'),
+  validQueryFormat: query('format')
+    .trim()
+    .toLowerCase()
+    .isIn([
+      'multiple',
+      'boolean',
+      null
+    ])
+    .withMessage('You must enter a valid question format.')
+
 }

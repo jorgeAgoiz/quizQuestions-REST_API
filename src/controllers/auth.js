@@ -14,7 +14,7 @@ exports.signUp = async (req, res, next) => {
   }
 
   const { email } = req.body
-  const timeAccess = new Date(Date.now())/* Actualizar con cada peticion a la api */
+  const timeAccess = new Date(Date.now())
 
   try {
     const existingUser = await User.findOne({ email })
@@ -29,10 +29,10 @@ exports.signUp = async (req, res, next) => {
       return res.status(401).json({ message: 'This email are registered in Quiz Questions API. Check your email inbox.', response: mailSended.response })
     }
     const key = uuidv4()
-    const newUser = await new User({
+    const newUser = new User({
       email,
       key,
-      last_access: timeAccess.toLocaleString(),
+      lastAccess: timeAccess.toLocaleString(),
       admin: false
     })
     newUser.save()
@@ -50,9 +50,6 @@ exports.signUp = async (req, res, next) => {
     return res.status(400).json({ message: 'Something went wrong, try it again.' })
   }
 }
-/* Cosas ha implementar en esta ruta:
-  - Tenemos que maquetar el correo electronico.
-   */
 
 // "/apikey" => DELETE
 exports.deleteUser = async (req, res, next) => {
@@ -68,4 +65,3 @@ exports.deleteUser = async (req, res, next) => {
     ? res.status(500).json({ message: 'Error, not found.' })
     : res.status(200).json({ message: 'Deleted user.', deleted_user: { email: deletedUser.email, id: deletedUser._id } })
 }
-/* En esta ruta tengo que plantear si quiero enviar un correo de confirmación al borrado del usuario */

@@ -6,7 +6,9 @@ const {
   validQuestion,
   validArrayIncorrectAnswers,
   validCorrectAnswer,
-  validIncorrectAnswers
+  validIncorrectAnswers,
+  validQueryCategory,
+  validQueryFormat
 } = require('../utils/validators')
 const router = Router()
 
@@ -19,6 +21,9 @@ router.post('/questions', [
   validIncorrectAnswers
 ], insertQuestions)
 
-router.get('/questions', getQuestions)
+router.get('/questions', [
+  validQueryCategory,
+  validQueryFormat
+], getQuestions)
 
 module.exports = router

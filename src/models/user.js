@@ -14,7 +14,7 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
-  last_access: {
+  lastAccess: {
     type: Date,
     required: true
   },

@@ -1,6 +1,7 @@
 const Questions = require('../models/question')
 const User = require('../models/user')
 const { validationResult } = require('express-validator')
+const { setAmount } = require('../utils/helperFunctions')
 
 exports.insertQuestions = async (req, res, next) => {
   const errors = validationResult(req)
@@ -39,12 +40,21 @@ exports.getQuestions = async (req, res, next) => {
     return res.status(401).json({ message: 'Error, unauthorized.' })
   }
 
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(412).json({ message: 'Something went wrong.', errors })
+  }
+  /* Checkeamos y actualizamos el usuario que esta realizando la petición  */
   const userAuthorized = await User.findOne({ key })
   if (!userAuthorized) {
     return res.status(401).json({ message: 'Error, wrong API KEY.' })
   }
+  const timeAccess = new Date(Date.now())
+  userAuthorized.lastAccess = timeAccess.toLocaleString()
+  userAuthorized.save()
+  /* Checkeamos la cantidad solicitada */
+  const amount = setAmount(parseInt(req.query.amount))
 
-  const amount = req.query.amount || 10
   const filters = {}
   if (req.query.category) {
     filters.category = req.query.category
@@ -55,18 +65,11 @@ exports.getQuestions = async (req, res, next) => {
 
   Questions.findRandom(filters, { _id: 0 }, { limit: amount }, (err, result) => {
     if (result === undefined) {
-      return res.status(500).json({ message: 'Error, not matches found' })
+      return res.status(404).json({ message: 'Error, not matches found.' })
     }
     if (!err) {
-      return res.status(200).json({ message: 'Everything its ok', data: result })
+      return res.status(200).json({ message: 'Your results.', data: result })
     }
     return res.status(500).json({ message: 'Error, something went wrong.', error: err })
   })
-  /*
-  return res.status(200).json({ message: 'Everything its ok', data: queryResult }) */
 }
-/* En esta ruta empieza lo fuerte:
-  - Validación de campos.
-  - Configurar queries.
-  - Experimentar con la paginación.
-  - Actualizar ultima peticion de usuario cuando pidan preguntas. */
