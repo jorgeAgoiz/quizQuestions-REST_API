@@ -7,11 +7,13 @@ const MONGODB_URI = process.env.MONGODB_URI
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const helmet = require('helmet')
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
+app.use(helmet())
 
 /* Routes */
 const authRoutes = require('./routes/auth')

@@ -22,6 +22,3 @@ router.post('/questions', [
 router.get('/questions', getQuestions)
 
 module.exports = router
-
-/* Ahora a desarrollar el controlador de peticion de preguntas y el objeto
-pregunta de la base de datos  */

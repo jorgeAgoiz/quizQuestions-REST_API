@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const random = require('mongoose-simple-random')
 mongoose.pluralize(null)
 
 const Schema = mongoose.Schema
@@ -27,5 +28,6 @@ const questionSchema = new Schema({
     required: true
   }
 })
+questionSchema.plugin(random)
 
 module.exports = mongoose.model('Questions', questionSchema)
