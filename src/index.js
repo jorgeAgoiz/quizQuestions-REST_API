@@ -8,8 +8,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const helmet = require('helmet')
+const compression = require('compression')
 
 const app = express()
+app.use(compression())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
@@ -24,14 +26,10 @@ app.use('/', questionsRoute)
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(result => {
-    app.listen(PORT, () => {
-      console.log(`Listening in port ${PORT}...`)
-    })
+    app.listen(PORT)
   }).catch(err => console.log(err))
 
 /*
     Siguientes pasos a seguir:
-    - Usar compresión gzip para peticiones.
-    - Usar clusters para mejorar la performance.
-    - Hashear la api key.
+    - Generar documentacion con JS doc.
 */
