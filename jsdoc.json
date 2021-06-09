@@ -1,0 +1,23 @@
+{
+    "plugins": [
+        "jsdoc-http-plugin"
+    ],
+    "source": {
+        "include": [
+            "src"
+        ],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules|docs)"
+    },
+    "templates": {
+        "default": {
+            "outputSourceFiles": false
+        },
+        "cleverLinks": false,
+        "monospaceLinks": false
+    },
+    "opts": {
+        "recurse": "true",
+        "destination": "./doc"
+    }
+}

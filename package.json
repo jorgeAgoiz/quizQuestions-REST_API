@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
     "start-dev": "nodemon src/index.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "docs": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -21,12 +22,14 @@
   },
   "homepage": "https://github.com/jorgeAgoiz/quizQuestions-REST_API#readme",
   "dependencies": {
-    "compression": "^1.7.4",
+    "compression": "1.7.4",
     "cors": "2.8.5",
     "dotenv": "10.0.0",
     "express": "4.17.1",
     "express-validator": "6.11.1",
     "helmet": "4.6.0",
+    "jsdoc": "3.6.7",
+    "jsdoc-http-plugin": "0.3.2",
     "mjml": "4.9.3",
     "mongodb": "3.6.9",
     "mongoose": "5.12.13",
@@ -35,7 +38,7 @@
     "nodemailer": "6.6.1",
     "nodemon": "2.0.7",
     "uuid": "8.3.2",
-    "uuid-apikey": "^1.5.2"
+    "uuid-apikey": "1.5.2"
   },
   "devDependencies": {
     "standard": "^16.0.3"

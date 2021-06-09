@@ -1,15 +1,18 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+/* Environment variables */
 const PORT = process.env.PORT
 const MONGODB_URI = process.env.MONGODB_URI
 
+/* Packages */
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const helmet = require('helmet')
 const compression = require('compression')
 
+/* Middlewares */
 const app = express()
 app.use(compression())
 app.use(express.json())
@@ -23,6 +26,7 @@ const questionsRoute = require('./routes/questions')
 app.use('/', authRoutes)
 app.use('/', questionsRoute)
 
+/* Mongoose Connection */
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(result => {
@@ -31,5 +35,7 @@ mongoose
 
 /*
     Siguientes pasos a seguir:
-    - Generar documentacion con JS doc.
+    - Estudiar el tema clusters.
+    - Implementar sentry.
+    - Documentar la API REST
 */

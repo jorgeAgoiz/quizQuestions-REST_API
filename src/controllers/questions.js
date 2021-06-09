@@ -7,7 +7,7 @@ const { setAmount } = require('../utils/helperFunctions')
 exports.insertQuestions = async (req, res) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    return res.status(412).json({ message: 'Something went wrong.', errors })
+    return res.status(412).json({ message: 'Errors in fields validation.', errors })
   }
 
   const { category, format, question, incorrectAnswers, correctAnswer, key } = req.body
@@ -43,7 +43,7 @@ exports.getQuestions = async (req, res) => {
 
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
-    return res.status(412).json({ message: 'Something went wrong.', errors })
+    return res.status(412).json({ message: 'Errors in fields validation.', errors })
   }
 
   try {

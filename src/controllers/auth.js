@@ -46,9 +46,9 @@ exports.signUp = async (req, res) => {
       html: mailTemplate(newKeyText(apiKey))
     })
 
-    return res.status(201).json({ message: 'Email registered, API key sended.', response: mailSended.response })
+    return res.status(201).json({ message: 'Email registered, API key was sent to your email.', response: mailSended.response })
   } catch (error) {
-    return res.status(400).json({ message: 'Something went wrong, try it again.', error: error.message })
+    return res.status(500).json({ message: 'Something went wrong, try it again.', error: error.message })
   }
 }
 
@@ -64,7 +64,7 @@ exports.deleteUser = async (req, res) => {
     const deletedUser = await User.findOneAndDelete({ email })
 
     !deletedUser
-      ? res.status(500).json({ message: 'Error, not found.' })
+      ? res.status(400).json({ message: 'Error, not found.' })
       : res.status(200).json({ message: 'Deleted user.', deleted_user: { email: deletedUser.email, id: deletedUser._id } })
   } catch (error) {
     return res.status(500).json({ message: 'Something went wrong.', error: error.message })
