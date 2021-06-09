@@ -31,5 +31,7 @@ mongoose
 
 /*
     Siguientes pasos a seguir:
-    - Construir la coleccion de preguntas en nuestra base de datos.
+    - Usar compresión gzip para peticiones.
+    - Usar clusters para mejorar la performance.
+    - Hashear la api key.
 */
