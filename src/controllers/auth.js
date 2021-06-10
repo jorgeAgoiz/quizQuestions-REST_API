@@ -27,7 +27,7 @@ exports.signUp = async (req, res) => {
         from: `"Questions Quiz" ${USER}`,
         to: email,
         subject: 'You API KEY',
-        html: mailTemplate(textA, apiK)
+        html: mailTemplate(textA, apiK, email)
       })
 
       return res.status(401).json({ message: 'This email are registered in Quiz Questions API. Check your email inbox.', response: mailSended.response })
@@ -46,7 +46,7 @@ exports.signUp = async (req, res) => {
       from: `"Questions Quiz" ${USER}`,
       to: email,
       subject: 'Your API KEY',
-      html: mailTemplate(textB, apiKey)
+      html: mailTemplate(textB, apiKey, email)
     })
 
     return res.status(201).json({ message: 'Email registered, API key was sent to your email.', response: mailSended.response })
