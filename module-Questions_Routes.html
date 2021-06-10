@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Questions_Routes - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-Auth_Routes.html">Auth_Routes</a></li><li><a href="module-Questions_Routes.html">Questions_Routes</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Questions_Routes</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext">Questions Routes</div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="GET"><span class="type-signature">(route) </span>GET<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">GET</td>
+                            <td class="name last">/questions</td>
+                            </tr>
+                            </table>
+                            Create Question Route
+                          <h5>Authentication</h5>
+                          <p>This route requires an API KEY authentication. If authentication fails it will return a 401 error.</p>
+                            <h5>Query Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">category</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">(optional) - Category accept seven options: [arte, historia, ciencia, deporte, entretenimiento, geografia].</td>
+          </tr><tr>
+            <td class="name">format</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">(optional) Format accept two options: [multiple, boolean].</td>
+          </tr><tr>
+            <td class="name">amount</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">(optional) By default ten, but maximum fourty.</td>
+          </tr><tr>
+            <td class="name">key</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">Api Key of user.</td>
+          </tr>
+          </table>
+                            <h5>Response:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">message</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">"Your results.".</td>
+          </tr><tr>
+            <td class="name">response</td>
+            <td class="type">Array.&lt;Object&gt;</td>
+            
+            
+            <td class="description last">Questions requested.</td>
+          </tr>
+          </table>
+                            <h5>Response Code:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            
+            <td class="type">200</td>
+            
+            
+            <td class="description last">Created. Question saved successfully.</td>
+          </tr><tr>
+            
+            <td class="type">404</td>
+            
+            
+            <td class="description last">Not Foun. Error, not matches found.</td>
+          </tr><tr>
+            
+            <td class="type">412</td>
+            
+            
+            <td class="description last">Precondition Failed. Errors in fields validation.</td>
+          </tr><tr>
+            
+            <td class="type">401</td>
+            
+            
+            <td class="description last">Unauthorized. Error, wrong API KEY.</td>
+          </tr><tr>
+            
+            <td class="type">500</td>
+            
+            
+            <td class="description last">Internal Server Error. Error, something went wrong.</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="POST"><span class="type-signature">(route) </span>POST<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h5>Route:</h5>
+                            <table class="params">
+                            <thead><tr><th>Method</th><th class="last">Path</th></tr></thead>
+                            <tr>
+                            <td class="type">POST</td>
+                            <td class="name last">/questions</td>
+                            </tr>
+                            </table>
+                            Create Question Route
+                          <h5>Authentication</h5>
+                          <p>This route requires an API KEY authentication. If authentication fails it will return a 401 error.</p>
+                            <h5>Body Parameters:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">category</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">Category accept six options: [arte, historia, ciencia, deporte, entretenimiento, geografia].</td>
+          </tr><tr>
+            <td class="name">format</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">Format accept two options: [multiple, boolean].</td>
+          </tr><tr>
+            <td class="name">question</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">Question.</td>
+          </tr><tr>
+            <td class="name">incorrectAnswers</td>
+            <td class="type">Array.&lt;String&gt;</td>
+            
+            
+            <td class="description last">Array of incorrects answers with maximum three strings.</td>
+          </tr><tr>
+            <td class="name">correctAnswer</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">Correct Answer.</td>
+          </tr><tr>
+            <td class="name">key</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">Api Key of user.</td>
+          </tr>
+          </table>
+                            <h5>Response:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            <td class="name">message</td>
+            <td class="type">String</td>
+            
+            
+            <td class="description last">"Question saved successfully.".</td>
+          </tr><tr>
+            <td class="name">response</td>
+            <td class="type">Object</td>
+            
+            
+            <td class="description last">Saved question object.</td>
+          </tr>
+          </table>
+                            <h5>Response Code:</h5>
+          <table class="params">
+            <thead>
+              <tr>
+                
+                <th>Type</th>
+                
+                
+                <th class="last">Description</th>
+              </tr>
+            </thead>
+            <tr>
+            
+            <td class="type">201</td>
+            
+            
+            <td class="description last">Created. Question saved successfully.</td>
+          </tr><tr>
+            
+            <td class="type">412</td>
+            
+            
+            <td class="description last">Precondition Failed. Errors in fields validation.</td>
+          </tr><tr>
+            
+            <td class="type">401</td>
+            
+            
+            <td class="description last">Unauthorized. You don´t have permission to insert questions..</td>
+          </tr><tr>
+            
+            <td class="type">500</td>
+            
+            
+            <td class="description last">Internal Server Error. Error, not saved.</td>
+          </tr>
+          </table>
+</div>
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Thu Jun 10 2021 10:03:22 GMT+0200 (hora de verano de Europa central) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
