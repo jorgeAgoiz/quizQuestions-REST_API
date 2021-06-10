@@ -60,9 +60,14 @@ exports.deleteUser = async (req, res) => {
   }
 
   try {
-    const { email } = req.body
-    const deletedUser = await User.findOneAndDelete({ email })
+    const { email, key } = req.body
 
+    if (!key) {
+      return res.status(401).json({ message: 'Error, unauthorized.' })
+    }
+    const apiKey = await uuidAPIKey.toUUID(key)
+
+    const deletedUser = await User.findOneAndDelete({ email, key: apiKey })
     !deletedUser
       ? res.status(400).json({ message: 'Error, not found.' })
       : res.status(200).json({ message: 'Deleted user.', deleted_user: { email: deletedUser.email, id: deletedUser._id } })

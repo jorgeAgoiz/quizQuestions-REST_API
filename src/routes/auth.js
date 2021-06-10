@@ -31,8 +31,10 @@ router.post('/apikey', validEmail, signUp)
  * @name DELETE
  * @path {DELETE} /apikey
  * @body {String} email - User email.
+ * @body {String} key - Api Key of user.
  * @code {200} Deleted. User was delete.
- * @code {400} Unauthorized. User not found.
+ * @code {400} Bad Request. User not found.
+ * @code {401} Unauthorized. You don´t have permissions.
  * @code {500} Internal Server Error. Something went wrong.
  * @response {String} message "Deleted user".
  * @response {Object} response - Deleted User Object.
