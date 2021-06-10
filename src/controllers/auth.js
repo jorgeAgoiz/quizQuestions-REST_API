@@ -21,11 +21,13 @@ exports.signUp = async (req, res) => {
     const existingUser = await User.findOne({ email })
     if (existingUser) {
       const apiK = await uuidAPIKey.toAPIKey(existingUser.key)
+
+      const textA = reminderText(apiK)
       const mailSended = await transporter.sendMail({
         from: `"Questions Quiz" ${USER}`,
         to: email,
         subject: 'You API KEY',
-        html: mailTemplate(reminderText(apiK))
+        html: mailTemplate(textA, apiK)
       })
 
       return res.status(401).json({ message: 'This email are registered in Quiz Questions API. Check your email inbox.', response: mailSended.response })
@@ -39,11 +41,12 @@ exports.signUp = async (req, res) => {
     })
     newUser.save()
 
+    const textB = newKeyText(apiKey)
     const mailSended = await transporter.sendMail({
       from: `"Questions Quiz" ${USER}`,
       to: email,
       subject: 'Your API KEY',
-      html: mailTemplate(newKeyText(apiKey))
+      html: mailTemplate(textB, apiKey)
     })
 
     return res.status(201).json({ message: 'Email registered, API key was sent to your email.', response: mailSended.response })
@@ -60,7 +63,7 @@ exports.deleteUser = async (req, res) => {
   }
 
   try {
-    const { email, key } = req.body
+    const { email, key } = req.query
 
     if (!key) {
       return res.status(401).json({ message: 'Error, unauthorized.' })

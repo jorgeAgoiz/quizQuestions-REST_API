@@ -9,7 +9,7 @@ const router = Router()
 
 /* Controllers and utils */
 const { signUp, deleteUser } = require('../controllers/auth')
-const { validEmail } = require('../utils/validators')
+const { validEmail, validQueryEmail } = require('../utils/validators')
 
 /* Routes */
 
@@ -30,8 +30,8 @@ router.post('/apikey', validEmail, signUp)
  * Delete User Route
  * @name DELETE
  * @path {DELETE} /apikey
- * @body {String} email - User email.
- * @body {String} key - Api Key of user.
+ * @query {String} email - User email.
+ * @query {String} key - Api Key of user.
  * @code {200} Deleted. User was delete.
  * @code {400} Bad Request. User not found.
  * @code {401} Unauthorized. You don´t have permissions.
@@ -39,6 +39,6 @@ router.post('/apikey', validEmail, signUp)
  * @response {String} message "Deleted user".
  * @response {Object} response - Deleted User Object.
  */
-router.delete('/apikey', validEmail, deleteUser)
+router.delete('/apikey', validQueryEmail, deleteUser)
 
 module.exports = router

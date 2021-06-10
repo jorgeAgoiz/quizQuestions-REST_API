@@ -73,6 +73,12 @@ module.exports = {
       'boolean',
       null
     ])
-    .withMessage('You must enter a valid question format.')
+    .withMessage('You must enter a valid question format.'),
+  validQueryEmail: query('email')// QUERY from DELETE USERS *******************
+    .trim()
+    .toLowerCase()
+    .isEmail()
+    .notEmpty()
+    .withMessage('You must enter a valid email.')
 
 }
