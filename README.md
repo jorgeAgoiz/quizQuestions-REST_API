@@ -1,2 +1,5 @@
 # quizQuestions-REST_API
-REST API NodeJs
+REST API de preguntas TRIVIA en castellano.
+
+# Documentacion
+https://jorgeagoiz.github.io/quizQuestions-REST_API/index.html
