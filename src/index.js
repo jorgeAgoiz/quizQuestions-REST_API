@@ -26,16 +26,13 @@ const questionsRoute = require('./routes/questions')
 app.use('/', authRoutes)
 app.use('/', questionsRoute)
 
+app.use((error, request, response, next) => {
+  console.log(error)
+})
+
 /* Mongoose Connection */
 mongoose
   .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(result => {
     app.listen(PORT)
   }).catch(err => console.log(err))
-
-/*
-    Siguientes pasos a seguir:
-    - Estudiar el tema clusters.
-    - Implementar sentry.
-    - Documentar la API REST
-*/

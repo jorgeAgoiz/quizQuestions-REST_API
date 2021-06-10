@@ -26,6 +26,7 @@ const {
  * Create Question Route
  * @name POST
  * @path {POST} /questions
+ * @auth This route requires an API KEY authentication. If authentication fails it will return a 401 error.
  * @body {String} category - Category accept six options: [arte, historia, ciencia, deporte, entretenimiento, geografia].
  * @body {String} format - Format accept two options: [multiple, boolean].
  * @body {String} question - Question.
@@ -52,7 +53,8 @@ router.post('/questions', [
  * Create Question Route
  * @name GET
  * @path {GET} /questions
- * @query {String} category - (optional) Category accept seven options: [arte, historia, ciencia, deporte, entretenimiento, geografia].
+ * @auth This route requires an API KEY authentication. If authentication fails it will return a 401 error.
+ * @query {String} category - (optional) - Category accept seven options: [arte, historia, ciencia, deporte, entretenimiento, geografia].
  * @query {String} format - (optional) Format accept two options: [multiple, boolean].
  * @query {String} amount - (optional) By default ten, but maximum fourty.
  * @query {String} key - Api Key of user.

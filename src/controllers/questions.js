@@ -37,16 +37,16 @@ exports.insertQuestions = async (req, res) => {
 exports.getQuestions = async (req, res) => {
   /* Aqui metodo para identificar la api key */
   const { key } = req.query
-  if (!key) {
-    return res.status(401).json({ message: 'Error, unauthorized.' })
-  }
-
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(412).json({ message: 'Errors in fields validation.', errors })
   }
 
   try {
+    if (!key) {
+      return res.status(401).json({ message: 'Error, unauthorized.' })
+    }
+
     /* Checkeamos y actualizamos el usuario que esta realizando la petición  */
     const apiKey = await uuidAPIKey.toUUID(key)
     const userAuthorized = await User.findOne({ key: apiKey })
