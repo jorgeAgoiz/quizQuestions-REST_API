@@ -36,3 +36,5 @@ mongoose
   .then(result => {
     app.listen(PORT)
   }).catch(err => console.log(err))
+
+/* En esta rama vamos a intentar implementar nuevas features para mejorar la performance */
