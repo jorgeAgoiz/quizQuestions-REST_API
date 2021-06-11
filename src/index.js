@@ -11,6 +11,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const helmet = require('helmet')
 const compression = require('compression')
+const { limiter } = require('./utils/rateLimiter')
 
 /* Middlewares */
 const app = express()
@@ -19,6 +20,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 app.use(helmet())
+app.use(limiter)
 
 /* Routes */
 const authRoutes = require('./routes/auth')
