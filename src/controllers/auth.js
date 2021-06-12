@@ -65,7 +65,7 @@ exports.deleteUser = async (req, res) => {
   try {
     const { email, key } = req.query
 
-    if (!key) {
+    if (!key || !uuidAPIKey.isAPIKey(key)) {
       return res.status(401).json({ message: 'Error, unauthorized.' })
     }
     const apiKey = await uuidAPIKey.toUUID(key)

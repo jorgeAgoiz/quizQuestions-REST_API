@@ -13,8 +13,8 @@ beforeAll(async () => {
     .send(newUser)
 })
 
-describe('Testing delete user route', () => {
-  test.skip('Checking that the user is delete correctly', async () => {
+describe.skip('Testing delete user route', () => {
+  test('Checking that the user is delete correctly', async () => {
     const result = await User.find({ email: 'jorgeagoiz@gmail.com' })
     const apiK = await uuidAPIKey.toAPIKey(result[0].key)
 
@@ -24,7 +24,7 @@ describe('Testing delete user route', () => {
       .expect(200)
   })
 
-  test.skip('Checking if I sent a string that its not an email', async () => {
+  test('Checking if I sent a string that its not an email', async () => {
     const result = await User.find({ email: 'jorgeagoiz@gmail.com' })
     const apiK = await uuidAPIKey.toAPIKey(result[0].key)
 
@@ -37,13 +37,28 @@ describe('Testing delete user route', () => {
     expect(response.body.errors.errors[0].msg).toBe('Invalid value')
   })
 
-  test('Checking if I sent a wrong api key, the user must not be deleted', async () => {
-    const result = await User.find({ email: 'jorgeagoiz@gmail.com' })
-    const apiK = await uuidAPIKey.toAPIKey(result[0].key)
-
+  test('Checking if I dont sent an api key, the user must not be deleted', async () => {
     const response = await api.delete('/apikey')
       .query({ email: 'jorgeagoiz@gmail.com' })
-      .query({ key: apiK })
+      .expect(401)
+
+    expect(response.body.message).toBe('Error, unauthorized.')
+  })
+
+  test('Checking if I sent a wrong string as api key', async () => {
+    const response = await api.delete('/apikey')
+      .query({ email: 'jorgeagoiz@gmail.com' })
+      .query({ key: 'wrong-api-key' })
+      .expect(401)
+    expect(response.body.message).toBe('Error, unauthorized.')
+  })
+
+  test('Checking if I sent wrong data and the user is not found', async () => {
+    const result = await User.find({ email: 'jorgeagoiz@gmail.com' })
+
+    const response = await api.delete('/apikey')
+      .query({ email: result[0].email })
+      .query({ key: 'J8RPY63-T4EM38R-MJK7S6G-C58KFN1' })// Random API KEY
       .expect(400)
 
     expect(response.body.message).toBe('Error, not found.')
