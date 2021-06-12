@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "docs": "jsdoc -c jsdoc.json",
     "deploy-docs": "gh-pages -d doc",
-    "test": "cross-env NODE_ENV=test jest --verbose --silent",
+    "test": "cross-env NODE_ENV=test jest --verbose ",
     "test:watch": "npm run test -- --watchAll"
   },
   "repository": {

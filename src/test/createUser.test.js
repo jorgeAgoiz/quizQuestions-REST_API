@@ -5,11 +5,11 @@ const User = require('../models/user')
 const api = supertest(app)
 
 beforeAll(async () => {
-  await User.deleteMany({})
+  /* await User.deleteMany({}) */
 })
 
-describe('Testing create user route', () => {
-  test.skip('Create user return a 201 status and JSON Content-Type', async () => {
+describe.skip('Testing create user route', () => { // SKIP MODE
+  test('Create user return a 201 status and JSON Content-Type', async () => {
     const newUser = {
       email: 'jorgeagoiz@gmail.com'
     }
@@ -19,7 +19,7 @@ describe('Testing create user route', () => {
       .expect('Content-Type', /application\/json/)
   })
 
-  test.skip('If email is empty will no save register', async () => {
+  test('If email is empty will no save register', async () => {
     const newEmptyUser = {
       email: ''
     }
@@ -30,7 +30,7 @@ describe('Testing create user route', () => {
     expect(response.body.message).toBe('Something went wrong.')
   })
 
-  test.skip('If email field is not an email no save register', async () => {
+  test('If email field is not an email no save register', async () => {
     const newEmptyUser = {
       email: 'whatsupbuddy'
     }
@@ -41,7 +41,7 @@ describe('Testing create user route', () => {
     expect(response.body.message).toBe('Something went wrong.')
   })
 
-  test.skip('If email is bussy will no save the same twice', async () => {
+  test('If email is bussy will no save the same twice', async () => {
     const newBussyUser = {
       email: 'jorgeagoiz@gmail.com'
     }
