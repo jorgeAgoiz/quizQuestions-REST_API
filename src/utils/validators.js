@@ -44,7 +44,7 @@ module.exports = {
     .trim()
     .isString()
     .notEmpty()
-    .isLength({ min: 2, max: 50 })
+    .isLength({ min: 1, max: 50 })
     .withMessage('You must enter a valid incorrect answer.'),
   validCorrectAnswer: body('correctAnswer')
     .trim()
