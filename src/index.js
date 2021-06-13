@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 /* Environment variables */
 const PORT = process.env.PORT
-const MONGODB_URI_TEST = process.env.MONGODB_URI_TEST/* Base de datos modo test */
+const MONGODB_URI = process.env.MONGODB_URI/* Base de datos modo test */
 
 /* Packages */
 const express = require('express')
@@ -34,11 +34,9 @@ app.use((error, request, response, next) => {
 
 /* Mongoose Connection */
 mongoose
-  .connect(MONGODB_URI_TEST, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
   .then(result => {
     app.listen(PORT)
   }).catch(err => console.log(err))
 
 module.exports = app
-
-/* En esta rama vamos a intentar implementar nuevas features para mejorar la performance */

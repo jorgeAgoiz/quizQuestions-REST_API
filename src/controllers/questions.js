@@ -39,7 +39,6 @@ exports.insertQuestions = async (req, res) => {
 }
 
 exports.getQuestions = async (req, res) => {
-  /* Aqui metodo para identificar la api key */
   const { key } = req.query
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
@@ -57,8 +56,8 @@ exports.getQuestions = async (req, res) => {
     if (!userAuthorized) {
       return res.status(401).json({ message: 'Error, wrong API KEY.' })
     }
-    const timeAccess = new Date(Date.now())
-    userAuthorized.lastAccess = timeAccess.toLocaleString()
+
+    userAuthorized.lastAccess = Date.now()
     userAuthorized.save()
     /* Checkeamos la cantidad solicitada */
     const amount = setAmount(parseInt(req.query.amount))
