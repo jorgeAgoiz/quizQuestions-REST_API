@@ -4,7 +4,7 @@
   "description": "REST API NodeJs",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node src/index.js",
+    "start": "node src/index.js",
     "start-dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "lint": "eslint .",
     "docs": "jsdoc -c jsdoc.json",
