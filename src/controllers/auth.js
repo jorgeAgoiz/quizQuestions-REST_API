@@ -15,8 +15,6 @@ exports.signUp = async (req, res) => {
   }
 
   const { email } = req.body
-  const timeAccess = new Date(Date.now())
-
   try {
     const existingUser = await User.findOne({ email })
     if (existingUser) {
@@ -32,11 +30,12 @@ exports.signUp = async (req, res) => {
 
       return res.status(401).json({ message: 'This email are registered in Quiz Questions API. Check your email inbox.', response: mailSended.response })
     }
+
     const { uuid, apiKey } = await uuidAPIKey.create()
     const newUser = new User({
       email,
       key: uuid,
-      lastAccess: timeAccess.toLocaleString(),
+      lastAccess: Date.now(),
       admin: false
     })
     newUser.save()

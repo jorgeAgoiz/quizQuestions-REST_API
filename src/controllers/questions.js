@@ -13,6 +13,10 @@ exports.insertQuestions = async (req, res) => {
   const { category, format, question, incorrectAnswers, correctAnswer, key } = req.body
 
   try {
+    if (!key || !uuidAPIKey.isAPIKey(key)) {
+      return res.status(401).json({ message: 'You don´t have permission to insert questions.', authorization: false })
+    }
+
     const apiKey = await uuidAPIKey.toUUID(key)
     const adminUser = await User.findOne({ key: apiKey })
 

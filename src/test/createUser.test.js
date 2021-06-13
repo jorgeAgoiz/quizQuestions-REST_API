@@ -19,7 +19,7 @@ describe.skip('Testing create user route', () => { // SKIP MODE
       .expect('Content-Type', /application\/json/)
   })
 
-  test('If email is empty will no save register', async () => {
+  test.skip('If email is empty will no save register', async () => {
     const newEmptyUser = {
       email: ''
     }
@@ -30,7 +30,7 @@ describe.skip('Testing create user route', () => { // SKIP MODE
     expect(response.body.message).toBe('Something went wrong.')
   })
 
-  test('If email field is not an email no save register', async () => {
+  test.skip('If email field is not an email no save register', async () => {
     const newEmptyUser = {
       email: 'whatsupbuddy'
     }
@@ -41,7 +41,7 @@ describe.skip('Testing create user route', () => { // SKIP MODE
     expect(response.body.message).toBe('Something went wrong.')
   })
 
-  test('If email is bussy will no save the same twice', async () => {
+  test.skip('If email is bussy will no save the same twice', async () => {
     const newBussyUser = {
       email: 'jorgeagoiz@gmail.com'
     }
